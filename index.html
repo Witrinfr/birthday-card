@@ -6,7 +6,7 @@
     <title>Feliz Cumpleaños, Mi Amor!</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Quicksand:wght@400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
 
         body {
             margin: 0;
@@ -15,75 +15,109 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            /* Sand Beige to Warm Cream Gradient */
+            background: linear-gradient(135deg, #e5d3b3 0%, #f5f5dc 100%);
             font-family: 'Quicksand', sans-serif;
             text-align: center;
-            color: #333;
+            color: #3e2723; /* Dark Chocolate Text */
         }
 
         .card {
             background: white;
             padding: 40px;
             border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
             max-width: 400px;
             width: 90%;
             margin: 20px;
         }
 
         h1 {
-            font-family: 'Lobster', cursive;
-            font-size: 3rem;
-            color: #ff6b81;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            font-size: 2.2rem;
+            color: #5d4037; /* Chocolate Brown */
             margin-bottom: 10px;
+            margin-top: 0;
         }
 
         .distance-text {
             font-weight: 600;
-            color: #a4b0be;
-            font-size: 1.1rem;
+            color: #8d6e63;
+            font-size: 0.9rem;
             margin-bottom: 25px;
             text-transform: uppercase;
             letter-spacing: 2px;
         }
 
-        /* Carousel Styles */
-        .memory-intro { font-style: italic; margin: 20px 0; color: #707a8a; }
+        /* Hides elements when letter is revealed */
+        .hidden { display: none !important; }
+
+        /* Carousel Styles with Smooth Transition */
+        .memory-intro { font-style: normal; margin: 20px 0; color: #707a8a; }
         .carousel-container { position: relative; display: none; margin: 20px 0; }
-        .memory-slide { display: none; animation: fadeIn 0.8s; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .memory-slide { 
+            display: none; 
+            animation: smoothFade 1.2s ease-in-out; 
+        }
+        @keyframes smoothFade { 
+            from { opacity: 0; transform: translateY(5px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
         
         .personal-photo {
             max-width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             margin-bottom: 15px;
         }
 
-        .photo-caption { font-style: italic; font-size: 0.95rem; color: #555; line-height: 1.4; }
+        .photo-caption { 
+            font-style: normal; /* Not italic as requested */
+            font-size: 1rem; 
+            color: #5d4037; 
+            line-height: 1.5; 
+        }
 
         .nav-btn {
-            background: #ff6b81;
+            background: #8d6e63;
             color: white;
             border: none;
             padding: 12px 25px;
-            border-radius: 25px;
+            border-radius: 5px;
             cursor: pointer;
             font-family: 'Quicksand', sans-serif;
             font-weight: 600;
             margin-top: 15px;
             transition: 0.3s;
         }
-        .nav-btn:hover { background: #ff4757; transform: scale(1.05); }
+        .nav-btn:hover { background: #5d4037; }
 
-        #letter-content { display: none; white-space: pre-line; line-height: 1.8; font-size: 1.1rem; }
+        /* Letter Styling */
+        #letter-content { 
+            display: none; 
+            white-space: pre-line; 
+            line-height: 1.8; 
+            font-size: 1.1rem; 
+            text-align: center;
+        }
+
+        /* Tighten gaps for the letter content */
+        #letter-content p:first-of-type { margin-top: 0; padding-top: 0; }
+        #letter-content p { margin-bottom: 5px; }
+
+        .emoji-row { 
+            margin-top: 0px; 
+            margin-bottom: 30px; 
+            font-size: 2rem; 
+        }
     </style>
 </head>
 <body>
 
     <div class="card">
         <h1>Feliz cumpleaños, mi amor!</h1>
-        <div class="distance-text">Hoy celebramos tu vida</div>
+        <div id="subtitle" class="distance-text">Hoy celebramos tu vida</div>
 
         <p id="intro-msg" class="memory-intro">"We're going to start with the memory lane of yours just a little bit, which you shared with me"</p>
         
@@ -92,20 +126,21 @@
         <div id="carousel" class="carousel-container">
             <div class="memory-slide">
                 <img src="baby.JPG" alt="Baby Photo" class="personal-photo">
-                <p class="photo-caption">You were once this small, not knowing anything other than how to cry, laugh, and eat</p>
-                <button class="nav-btn" onclick="changeSlide(1)">Next Memory ➡</button>
+                <p class="photo-caption">I don’t know how old you were here, but look how smolll Kevin was! You were once this tiny, only knowing how to cry, laugh, and eat!😆</p>
+                <button class="nav-btn" onclick="changeSlide(1)">Next Photo ➡</button>
             </div>
 
             <div class="memory-slide">
                 <img src="baseball.JPG" alt="Baseball Photo" class="personal-photo">
-                <p class="photo-caption">You attended so many baseball games when you were younger... it’s just beautiful</p>
+                <img src="baseball2.JPG" alt="Baseball Photo" class="personal-photo">
+                <p class="photo-caption">And look at these photos, all about baseball! You looked so happy, going to so many games. Of course I wasn’t there haha, but reading your messages about how grateful you felt and how supportive your parents were is just so beautiful to me🤍</p>
                 <button class="nav-btn" onclick="changeSlide(1)">Next Memory ➡</button>
             </div>
 
             <div class="memory-slide">
                 <img src="spike.JPG" alt="Spike Hair Photo" class="personal-photo">
-                <p class="photo-caption">I will always remember this spiked hair, Kevin hahaha! One of my favorite photos of you!</p>
-                <button class="nav-btn" onclick="revealLetter()">Read my letter ❤️</button>
+                <p class="photo-caption">Last but not least, this one wins best childhood photo 🏆 I still can’t believe the story behind it — I laugh every time I think about it. You were so serious about making your hair spike that high. You even let your head hang off the bed so it wouldn’t get messed up and made your mom retouch it again. ICONIC. GOLD. 😆💛</p>
+                <button class="nav-btn" onclick="revealLetter()">Now please read my letter ❤️</button>
             </div>
         </div>
 
@@ -121,9 +156,8 @@
 
                 Disfruta tu día, amor.
 
-                Te quiero mucho 🤍
-            </p>
-            <div style="font-size: 2rem; margin: 20px 0;">🎁🥳🎉</div>
+                Te quiero mucho 🤍</p>
+            <div class="emoji-row">🎁🥳🎉</div>
             <button class="nav-btn" onclick="replayMemories()">📸 See Memories Again</button>
         </div>
     </div>
@@ -150,15 +184,17 @@
                 particleCount: 150,
                 spread: 70,
                 origin: { y: 0.6 },
-                colors: ['#ff6b81', '#fecfef', '#ffffff']
+                colors: ['#8d6e63', '#e5d3b3', '#ffffff']
             });
             document.getElementById("carousel").style.display = "none";
+            document.getElementById("subtitle").classList.add("hidden"); // Hides "Hoy celebramos tu vida"
             document.getElementById("letter-content").style.display = "block";
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function replayMemories() {
             document.getElementById("letter-content").style.display = "none";
+            document.getElementById("subtitle").classList.remove("hidden"); // Shows "Hoy celebramos tu vida" again
             document.getElementById("carousel").style.display = "block";
             currentSlide = 0;
             for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
