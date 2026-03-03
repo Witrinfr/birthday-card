@@ -21,7 +21,15 @@
         }
 
         .card {
-            background: white;
+            /* 1. Add the photo as the background with a semi-transparent white overlay */
+            /* !!! IMPORTANT !!! Change 'card-image.jpg' to match your uploaded photo filename exactly */
+            background-image: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('card-image.jpg');
+            
+            /* 2. Style the photo for a perfect fit */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
             padding: 40px;
             border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
@@ -46,7 +54,8 @@
 
         .distance-text {
             font-weight: 600;
-            color: #a4b0be;
+            /* 3. Darken this text color slightly for readability on a photo */
+            color: #707a8a; 
             font-size: 1.1rem;
             margin-bottom: 25px;
             text-transform: uppercase;
@@ -84,12 +93,11 @@
         </p>
         <p>
             Mi amor, Kevin,
-
 Gracias por traer tanta alegría a mi vida desde el día en que nos conocimos. Gracias por abrirte conmigo y compartir tu vida, incluso estando a miles de kilómetros de distancia. A veces olvido lo lejos que estamos, porque me haces sentir muy cerca, incluso solo a través de los mensajes que nos enviamos cada día.
 
 Gracias por siempre dar lo mejor de ti a las personas que te rodean. Gracias por ser amable, sincero y honesto. Gracias por dejarme conocerte. Gracias por hacer tiempo para mí a pesar de tu horario tan cambiante, y aun así enviarme esos mensajes largos — los valoro muchísimo, jaja. Gracias por hacerme sonreír todos los días.
 
-Lo más importante, espero que disfrutes de verdad el comienzo de tus 34 años hoy. Te deseo una vida larga y saludable para que puedas viajar por el mundo y vivir todo lo que sueñas, mi amor. Y espero que el próximo año podamos celebrar tu cumpleaños juntos.
+Lo más importante, espero que disfrutes de verdad el comienzo de tus 34 años hoy. Te deseo una vida larga y saludable para que puedas viajar por el mundo y vivir todo lo que sueñas, mi amor. Y espero que el próximo year podamos celebrar tu cumpleaños juntos.
 
 Disfruta tu día, amor.
         </p>
