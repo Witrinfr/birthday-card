@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Cumpleaños!</title>
+    <title>Feliz Cumpleaños, Mi Amor!</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Quicksand:wght@400;600&display=swap');
 
@@ -27,13 +28,7 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.1);
             max-width: 400px;
             width: 90%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+            margin: 20px;
         }
 
         h1 {
@@ -41,7 +36,6 @@
             font-size: 3rem;
             color: #ff6b81;
             margin-bottom: 10px;
-            margin-top: 0;
         }
 
         .distance-text {
@@ -53,80 +47,124 @@
             letter-spacing: 2px;
         }
 
-        p {
-            line-height: 1.8;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            white-space: pre-line; /* This keeps your paragraph spacing */
-        }
-
-        .heart {
-            color: #ff4757;
-            font-size: 2rem;
-            animation: pulse 1.5s infinite;
-            display: inline-block;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-    .photo-section {
-            margin-bottom: 30px;
-            padding: 10px;
-        }
-
+        /* Carousel Styles */
+        .memory-intro { font-style: italic; margin: 20px 0; color: #707a8a; }
+        .carousel-container { position: relative; display: none; margin: 20px 0; }
+        .memory-slide { display: none; animation: fadeIn 0.8s; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
         .personal-photo {
             max-width: 100%;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
 
-        .photo-caption {
-            font-style: italic;
-            font-size: 0.95rem;
-            color: #555;
-            line-height: 1.4;
-        }</style>
+        .photo-caption { font-style: italic; font-size: 0.95rem; color: #555; line-height: 1.4; }
+
+        .nav-btn {
+            background: #ff6b81;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .nav-btn:hover { background: #ff4757; transform: scale(1.05); }
+
+        #letter-content { display: none; white-space: pre-line; line-height: 1.8; font-size: 1.1rem; }
+    </style>
 </head>
 <body>
 
     <div class="card">
         <h1>Feliz cumpleaños, mi amor!</h1>
         <div class="distance-text">Hoy celebramos tu vida</div>
-        <div class="photo-section">
-            <img src="baby.JPG" alt="Baby Kevin" class="personal-photo">
-            <p class="photo-caption">You were once this small, not knowing anything other than how to cry, laugh, and eat</p>
-        </div>
 
-        <div class="photo-section">
-            <img src="baseball.JPG" alt="Baseball Kevin" class="personal-photo">
-            <p class="photo-caption">You attended so many baseball games when you were younger, and I love the way you reminisce about all of it. It’s just beautiful</p>
-        </div>
-
-        <div class="photo-section">
-            <img src="spike.JPG" alt="Spike Hair Kevin" class="personal-photo">
-            <p class="photo-caption">I will always remember this spiked hair, Kevin hahaha. I can only imagine how hilarious it must have been seeing you hang your head off the end of the bed so your hair wouldn’t get ruined 😂 Hey, remember this is one of my favorite photos of you!</p>
-        </div>
-
-        <p>
-            Mi amor, Kevin,
-
-            Gracias por traer tanta alegría a mi vida desde el día en que nos conocimos. Gracias por abrirte conmigo y compartir tu vida, incluso estando a miles de kilómetros de distancia. A veces olvido lo lejos que estamos, porque me haces sentir muy cerca, incluso solo a través de los mensajes que nos enviamos cada día.
-
-            Gracias por siempre dar lo mejor de ti a las personas que te rodean. Gracias por ser amable, sincero y honesto. Gracias por dejarme conocerte. Gracias por hacer tiempo para mí a pesar de tu horario tan cambiante, y aun así enviarme esos mensajes largos — los valoro muchísimo, jaja. Gracias por hacerme sonreír todos los días.
-
-            Lo más importante, espero que disfrutes de verdad el comienzo de tus 34 años hoy. Te deseo una vida larga y saludable para que puedas viajar por el mundo y vivir todo lo que sueñas, mi amor. Y espero que el próximo año podamos celebrar tu cumpleaños juntos.
-
-            Disfruta tu día, amor.
-        </p>
+        <p id="intro-msg" class="memory-intro">"We're going to start with the memory lane of yours just a little bit, which you shared with me"</p>
         
-        <p>Te quiero mucho 🤍</p>
-        
-        <div class="heart">🎁🥳🎉</div>
+        <button id="startBtn" class="nav-btn" onclick="startMemories()">Enter Memory Lane ❤️</button>
+
+        <div id="carousel" class="carousel-container">
+            <div class="memory-slide">
+                <img src="baby.JPG" alt="Baby Photo" class="personal-photo">
+                <p class="photo-caption">You were once this small, not knowing anything other than how to cry, laugh, and eat</p>
+                <button class="nav-btn" onclick="changeSlide(1)">Next Memory ➡</button>
+            </div>
+
+            <div class="memory-slide">
+                <img src="baseball.JPG" alt="Baseball Photo" class="personal-photo">
+                <p class="photo-caption">You attended so many baseball games when you were younger... it’s just beautiful</p>
+                <button class="nav-btn" onclick="changeSlide(1)">Next Memory ➡</button>
+            </div>
+
+            <div class="memory-slide">
+                <img src="spike.JPG" alt="Spike Hair Photo" class="personal-photo">
+                <p class="photo-caption">I will always remember this spiked hair, Kevin hahaha! One of my favorite photos of you!</p>
+                <button class="nav-btn" onclick="revealLetter()">Read my letter ❤️</button>
+            </div>
+        </div>
+
+        <div id="letter-content">
+            <p>
+                Mi amor, Kevin,
+
+                Gracias por traer tanta alegría a mi vida desde el día en que nos conocimos. Gracias por abrirte conmigo y compartir tu vida, incluso estando a miles de kilómetros de distancia. A veces olvido lo lejos que estamos, porque me haces sentir muy cerca, incluso solo a través de los mensajes que nos enviamos cada día.
+
+                Gracias por siempre dar lo mejor de ti a las personas que te rodean. Gracias por ser amable, sincero y honesto. Gracias por dejarme conocerte. Gracias por hacer tiempo para mí a pesar de tu horario tan cambiante, y aun así enviarme esos mensajes largos — los valoro muchísimo, jaja. Gracias por hacerme sonreír todos los días.
+
+                Lo más importante, espero que disfrutes de verdad el comienzo de tus 34 años hoy. Te deseo una vida larga y saludable para que puedas viajar por el mundo y vivir todo lo que sueñas, mi amor. Y espero que el próximo año podamos celebrar tu cumpleaños juntos.
+
+                Disfruta tu día, amor.
+
+                Te quiero mucho 🤍
+            </p>
+            <div style="font-size: 2rem; margin: 20px 0;">🎁🥳🎉</div>
+            <button class="nav-btn" onclick="replayMemories()">📸 See Memories Again</button>
+        </div>
     </div>
 
+    <script>
+        let currentSlide = 0;
+        const slides = document.getElementsByClassName("memory-slide");
+
+        function startMemories() {
+            document.getElementById("intro-msg").style.display = "none";
+            document.getElementById("startBtn").style.display = "none";
+            document.getElementById("carousel").style.display = "block";
+            slides[0].style.display = "block";
+        }
+
+        function changeSlide(n) {
+            slides[currentSlide].style.display = "none";
+            currentSlide += n;
+            slides[currentSlide].style.display = "block";
+        }
+
+        function revealLetter() {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff6b81', '#fecfef', '#ffffff']
+            });
+            document.getElementById("carousel").style.display = "none";
+            document.getElementById("letter-content").style.display = "block";
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function replayMemories() {
+            document.getElementById("letter-content").style.display = "none";
+            document.getElementById("carousel").style.display = "block";
+            currentSlide = 0;
+            for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
+            slides[0].style.display = "block";
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+    </script>
 </body>
 </html>
