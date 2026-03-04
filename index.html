@@ -4,130 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz Cumpleaños, Mi Amor!</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💌🎁</text></svg>">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
 
         body {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 0; padding: 0;
+            display: flex; justify-content: center; align-items: center;
             min-height: 100vh;
+            /* Updated to warmer background tones to match the illustration */
             background: linear-gradient(135deg, #e5d3b3 0%, #f5f5dc 100%);
             font-family: 'Quicksand', sans-serif;
             text-align: center;
-            color: #3e2723;
+            color: #3e2723; /* Dark Chocolate Text */
         }
 
         .card {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
+            background: white; padding: 40px; border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.05);
-            max-width: 400px;
-            width: 90%;
-            margin: 20px;
-            position: relative;
+            max-width: 400px; width: 90%; margin: 20px; position: relative;
         }
 
-        h1 {
-            font-weight: 600;
-            font-size: 2.2rem;
-            color: #5d4037;
-            margin-bottom: 10px;
-            margin-top: 0;
-        }
-
-        .distance-text {
-            font-weight: 600;
-            color: #8d6e63;
-            font-size: 0.9rem;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
+        h1 { font-weight: 600; font-size: 2.2rem; color: #5d4037; margin: 0 0 10px 0; }
+        .distance-text { font-weight: 600; color: #8d6e63; font-size: 0.9rem; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
         .hidden { display: none !important; }
 
-        .memory-intro { font-style: normal; margin: 20px 0; color: #707a8a; }
-        .carousel-container { position: relative; display: none; margin: 20px 0; }
-        
-        .memory-slide { 
-            display: none; 
-            animation: smoothFade 1.2s ease-in-out; 
-        }
-        @keyframes smoothFade { 
-            from { opacity: 0; transform: translateY(5px); } 
-            to { opacity: 1; transform: translateY(0); } 
-        }
-        
-        .personal-photo {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            margin-bottom: 15px;
-        }
+        .front-image { width: 100%; max-width: 250px; margin-bottom: 20px; border-radius: 10px; }
 
-        .photo-caption { 
-            font-style: normal;
-            font-size: 1rem; 
-            color: #5d4037; 
-            line-height: 1.5; 
-        }
+        .memory-slide { display: none; animation: smoothFade 1.2s ease-in-out; }
+        @keyframes smoothFade { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .personal-photo { max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 15px; }
+        .photo-caption { font-size: 1rem; color: #5d4037; line-height: 1.5; }
 
         .nav-btn {
-            background: #8d6e63;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
-            margin-top: 15px;
-            transition: 0.3s;
-            position: relative;
-            z-index: 100; /* Ensures the button is always on top for clicking */
+            background: #8d6e63; color: white; border: none; padding: 12px 25px;
+            border-radius: 5px; cursor: pointer; font-family: 'Quicksand', sans-serif;
+            font-weight: 600; margin-top: 15px; transition: 0.3s;
+            position: relative; z-index: 100;
         }
         .nav-btn:hover { background: #5d4037; transform: scale(1.02); }
 
-        #letter-content { 
-            display: none; 
-            white-space: pre-line; 
-            line-height: 1.8; 
-            font-size: 1.1rem; 
-            text-align: center;
-            margin-top: -30px; /* Pulls content up after hiding subtitle */
-        }
-        
-        #letter-content p:first-of-type { margin-top: 0; padding-top: 0; }
-        #letter-content p { margin-bottom: 5px; }
-        .emoji-row { margin-top: 0px; margin-bottom: 30px; font-size: 2rem; }
+        #letter-content { display: none; white-space: pre-line; line-height: 1.8; font-size: 1.1rem; margin-top: -30px; }
+        #letter-content p:first-of-type { margin-top: 0; }
+        .emoji-row { margin-bottom: 30px; font-size: 2rem; }
 
-        #muteBtn {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(93, 64, 55, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 45px;
-            height: 45px;
-            cursor: pointer;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-        }
+        /* The Speaker icon stays fixed at the bottom right */
+        #muteBtn { position: fixed; bottom: 20px; right: 20px; background: rgba(93, 64, 55, 0.2); border: none; border-radius: 50%; width: 45px; height: 45px; z-index: 1000; cursor: pointer; }
     </style>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💌🎁</text></svg>">    
 </head>
 <body>
 
     <audio id="bgMusic" loop>
-        <source src="bg-music-dtmf.mp3" type="audio/mpeg">
+        <source src="amor.mp3" type="audio/mpeg">
     </audio>
 
     <button id="muteBtn" onclick="toggleMute()">🔊</button>
@@ -136,26 +67,30 @@
         <h1>Feliz cumpleaños, mi amor!</h1>
         <div id="subtitle" class="distance-text">Hoy celebramos tu vida</div>
 
-        <p id="intro-msg" class="memory-intro">We're going to start with the memory lane of yours just a little bit, which you shared with me. Ready?</p>
-        
-        <button id="startBtn" class="nav-btn" onclick="startMemories()">Si amor, llevame ❤️</button>
+        <div style="text-align: center; margin-bottom: 25px;">
+            <img src="birthdaycake.jpg" style="max-width: 250px; border-radius: 10px;">
+        </div>
+
+        <p id="intro-msg" class="memory-intro">Welcome to this dedicated site celebrating your 34th birthday! Remember the photos you shared with me? Yes, we’re going to start this birthday journey by walking down your memory lane. Please bear with me with the captions and everything, as I’m trying my best haha. Are you ready, my love?</p>
+    
+        <button id="startBtn" class="nav-btn" onclick="startMemories()">Si amor, estoy listo ❤️</button>
 
         <div id="carousel" class="carousel-container">
             <div class="memory-slide">
                 <img src="baby.JPG" class="personal-photo">
-                <p class="photo-caption">I don’t know how old you were here, but look how smolll Kevin was! You were once this tiny, only knowing how to cry, laugh, and eat!😆</p>
+                <p class="photo-caption">Let’s start with this little baby Kevin 🥹 I think you were 2 in this picture? I could be wrong but you don't even know about that, so we are even haha. Look how smolll you were! You were once this tiny, just knowing how to cry, laugh, and eat! Completely unaware of things like hospital dynamic shifts 😆</p>
                 <button class="nav-btn" onclick="changeSlide(1)">Next Photo ➡</button>
             </div>
 
             <div class="memory-slide">
                 <img src="baby2.JPG" class="personal-photo">
-                <p class="photo-caption">This one too🥹 Maybe you can tell me later how old you were here haha. I really love your smile in this one. Qué dulce, mi amor!</p>
+                <p class="photo-caption">Here you are a little older... maybe 4? You better go check with your mom, I am curious here haha jk. Your smile here is so sweet, mi cielo. I hope that no matter how hard or tiring life can be, you always keep this same gentle smile. And seriously… what was that pose? 😂</p>
                 <button class="nav-btn" onclick="changeSlide(1)">Next Photo ➡</button>
             </div>
 
             <div class="memory-slide">
                 <img src="siblings.JPG" class="personal-photo">
-                <p class="photo-caption">Thank you for sharing this photo with me. I remember the first time I received it — I couldn’t stop smiling. Seeing this photo makes my heart feel so warm. You were born and raised in such a beautiful family. The way you look up to your sisters and how Jaime always comes to the rescue... with your kindness and softness, you bring light, joy, and love to your family. You complete them. ❤️</p>
+                <p class="photo-caption">Ahhh, thank you for sharing this photo with me, my love. Where do I even begin? I really love this picture! not only were you smiling so confidently haha, but I also got to know your siblings through it. Melissa, the one you look up to. Johanna, who shares the same birth month as you and gave you Nash, making you a cool young uncle.. how wonderful is that? And Jaime, who always comes to the rescue, just like you told me. And you? What were you doing around the house, my love? Hahaha, I’m kidding. I’m sure you did a lot. You’re the youngest, and you complete them with your love, kindness, and softness :)</p>
                 <button class="nav-btn" onclick="changeSlide(1)">Next Photo ➡</button>
             </div>
             
@@ -163,19 +98,19 @@
                 <img src="baseball.JPG" class="personal-photo">
                 <img src="baseball2.JPG" class="personal-photo">
                 <img src="baseball3.JPG" class="personal-photo">
-                <p class="photo-caption">And look at these photos, all about sports! I remember you telling me how supportive your parents were and how proud you felt sharing those stories with me. You were and always will be incredible, por siempre!</p>
+                <p class="photo-caption">I feel like basketball and baseball were the biggest parts of your childhood. Hearing all your stories about your sports journey made me smile so much the first time and even now, remembering them makes my heart warm. You joined the greatest basketball team back then, right? You were so passionate… and you still are, especially about baseball. I’m truly glad you had such a beautiful childhood, my love💛</p>
                 <button class="nav-btn" onclick="changeSlide(1)">Next Photo ➡</button>
             </div>
 
             <div class="memory-slide">
                 <img src="blackeye.JPG" class="personal-photo">
-                <p class="photo-caption">About this one… why is this here? Hahaha. It’s memorable to me because you told me you got a black eye — from what again? Please remind me haha. I know you’re responsible and all, but please take care of yourself more and more, okay?</p>
+                <p class="photo-caption">Ahh the black eye that you probably got because of baseball. Even if you don’t remember how it happened exactly haha. Anyway, I may not have known you from the start, but from now on, I hope nothing ever hurts those beautiful eyes again. You’re so calm, gentle, and steady but still, take extra care, okay?</p>
                 <button class="nav-btn" onclick="changeSlide(1)">Next Photo ➡</button>
             </div>
 
             <div class="memory-slide">
                 <img src="spike.JPG" class="personal-photo">
-                <p class="photo-caption">Last but not least, this one wins best childhood photo 🏆 I still can’t believe the story behind it! I laugh every time I think about it. You were so serious about making your hair spike that high. ICONIC. GOLD. 😆💛</p>
+                <p class="photo-caption">Last but not least, this one wins best childhood photo 🏆 I still can’t believe the story behind it! I laugh every time I think about it. You were so serious about making your hair spike that high. ICONIC. GOLD. 😆♥️</p>
                 <button class="nav-btn" onclick="revealLetter()">Voy a leer mi tarjeta ahora 🤍</button>
             </div>
         </div>
@@ -184,17 +119,17 @@
             <p>
                 Mi amor, <strong>Kevin Michael Vanegas</strong>,
 
-                Gracias por traer tanta alegría a mi vida desde el día en que nos conocimos. Gracias por abrirte conmigo y compartir tu vida, incluso estando a miles de kilómetros de distancia. A veces olvido lo lejos que estamos, porque me haces sentir muy cerca, incluso solo a través de los mensajes que nos enviamos cada día.
+                Gracias por traer tanta alegría a mi vida desde el día en que nos conocimos. Gracias por abrir tu corazón conmigo y por compartir tu vida, incluso estando a miles de kilómetros de distancia. A veces olvido lo lejos que estamos, porque logras que te sienta tan cerca a través de los mensajes que nos enviamos cada día, y de cada foto y video que compartes conmigo.
 
-                Gracias por siempre dar lo mejor de ti a las personas que te rodean. Gracias por ser amable, sincero y honesto. Gracias por dejarme conocerte. Gracias por hacer tiempo para mí a pesar de tu horario tan cambiante, y aun así enviarme esos mensajes largos — los valoro muchísimo, jaja. Gracias por hacerme sonreír todos los días.
+                Gracias por siempre dar lo mejor de ti a las personas que te rodean. Gracias por ser tan amable, tan sincero y tan honesto. Gracias por permitirme conocerte de verdad. Gracias por confiar en mí. Gracias por hacer tiempo para mí, aun con tu agenda tan ocupada, y por seguir enviándome esos mensajes largos que valoro más de lo que imaginas. Gracias por hacerme sonreír todos los días.
 
-                Lo más importante, espero que disfrutes de verdad el comienzo de tus 34 años hoy. Te deseo una vida larga y saludable para que puedas viajar por el mundo y vivir todo lo que sueñas, mi amor. Y espero que el próximo año podamos celebrar tu cumpleaños juntos.
+                Una vez me preguntaste cómo era mi vida antes de ti, y simplemente respondí: “nada especial”. Tal vez era la respuesta más sencilla. Pero si soy honesta, he pasado mucho tiempo trabajando en mí misma, intentando crecer, intentando ser una mejor versión de mí. No siempre fue fácil — el camino para llegar hasta aquí tuvo sus propios desafíos. Pero hay algo que he comprendido, aunque no siempre lo diga en voz alta: tú y yo vemos la vida de una manera muy parecida. La forma en que piensas, en que entiendes las cosas, en que miras el mundo… se siente tan natural para mí. Hablar contigo es tan fácil, tan ligero, como si estuviera hablando con alguien que simplemente me entiende. Y quizá por eso estar contigo se siente tan correcto… porque, de alguna manera, eres la persona que siempre he estado buscando.
 
-                Disfruta tu día, amor.
+                Y lo más importante, espero que disfrutes de verdad el comienzo de tus 34 años hoy. Deseo que tengas una vida larga y saludable, para que puedas viajar por el mundo y vivir todo lo que sueñas, mi amor. Y espero que el próximo año podamos celebrar tu cumpleaños juntos.
 
                 Te quiero mucho, de corazón🤍</p>
             <div class="emoji-row">🎁🥳🎉</div>
-            <button class="nav-btn" onclick="replayMemories()">📸 Ver recuerdos</button>
+            <button class="nav-btn" onclick="replayMemories()">📸 Llévame al inicio</button>
         </div>
     </div>
 
@@ -220,7 +155,7 @@
         }
 
         function revealLetter() {
-            // Burst confetti when opening the letter
+            // Burst white love emoji when opening the letter
             confetti({
                 particleCount: 150,
                 spread: 70,
@@ -234,13 +169,25 @@
         }
 
         function replayMemories() {
-            document.getElementById("letter-content").style.display = "none";
-            document.getElementById("subtitle").classList.remove("hidden");
-            document.getElementById("carousel").style.display = "block";
-            currentSlide = 0;
-            for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
-            slides[0].style.display = "block";
-            window.scrollTo({top: 0, behavior: 'smooth'});
+        // Hide the letter content
+        document.getElementById("letter-content").style.display = "none";
+    
+        // Show the subtitle and front page view again
+        document.getElementById("subtitle").classList.remove("hidden");
+        document.getElementById("intro-msg").style.display = "block";
+        document.getElementById("startBtn").style.display = "block";
+    
+        // Ensure the carousel is hidden
+        document.getElementById("carousel").style.display = "none";
+    
+        // Reset the slide counter for next time
+        currentSlide = 0;
+        for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+        }
+    
+        // Scroll smoothly to the top
+        window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function toggleMute() {
@@ -252,6 +199,19 @@
                 document.getElementById("muteBtn").innerHTML = "🔈";
             }
         }
+
+        // Commands the music to pause when the app is minimized or tab is switched
+        document.addEventListener("visibilitychange", function() {
+            if (document.hidden) {
+                music.pause();
+            } else {
+        // Only resumes if the music was already playing (carousel or letter is visible)
+        if (document.getElementById("carousel").style.display === "block" || 
+            document.getElementById("letter-content").style.display === "block") {
+            music.play().catch(e => console.log("Resume blocked by browser"));
+        }
+    }
+});
     </script>
 </body>
 </html>
