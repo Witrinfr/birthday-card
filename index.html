@@ -15,11 +15,10 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            /* Sand Beige to Warm Cream Gradient */
             background: linear-gradient(135deg, #e5d3b3 0%, #f5f5dc 100%);
             font-family: 'Quicksand', sans-serif;
             text-align: center;
-            color: #3e2723; /* Dark Chocolate Text */
+            color: #3e2723;
         }
 
         .card {
@@ -36,7 +35,7 @@
             font-family: 'Quicksand', sans-serif;
             font-weight: 600;
             font-size: 2.2rem;
-            color: #5d4037; /* Chocolate Brown */
+            color: #5d4037;
             margin-bottom: 10px;
             margin-top: 0;
         }
@@ -50,10 +49,8 @@
             letter-spacing: 2px;
         }
 
-        /* Hides elements when letter is revealed */
         .hidden { display: none !important; }
 
-        /* Carousel Styles with Smooth Transition */
         .memory-intro { font-style: normal; margin: 20px 0; color: #707a8a; }
         .carousel-container { position: relative; display: none; margin: 20px 0; }
         .memory-slide { 
@@ -73,7 +70,7 @@
         }
 
         .photo-caption { 
-            font-style: normal; /* Not italic as requested */
+            font-style: normal;
             font-size: 1rem; 
             color: #5d4037; 
             line-height: 1.5; 
@@ -93,35 +90,64 @@
         }
         .nav-btn:hover { background: #5d4037; }
 
-        /* Letter Styling */
         #letter-content { 
             display: none; 
             white-space: pre-line; 
             line-height: 1.8; 
             font-size: 1.1rem; 
             text-align: center;
+            margin-top: -30px; 
+        }
+        
+        #letter-content p:first-of-type {
+            margin-top: 0;
+            padding-top: 0;
         }
 
-        /* Tighten gaps for the letter content */
-        #letter-content p:first-of-type { margin-top: 0; padding-top: 0; }
-        #letter-content p { margin-bottom: 5px; }
-
+        #letter-content p {
+            margin-bottom: 5px;
+        }
+        
         .emoji-row { 
             margin-top: 0px; 
             margin-bottom: 30px; 
             font-size: 2rem; 
         }
+
+        #muteBtn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(93, 64, 55, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            transition: 0.3s;
+        }
     </style>
 </head>
 <body>
+
+    <audio id="bgMusic" loop>
+        <source src="bg-music-dtmf.mp3" type="audio/mpeg">
+    </audio>
+
+    <button id="muteBtn" onclick="toggleMute()">🔊</button>
 
     <div class="card">
         <h1>Feliz cumpleaños, mi amor!</h1>
         <div id="subtitle" class="distance-text">Hoy celebramos tu vida</div>
 
-        <p id="intro-msg" class="memory-intro">"We're going to start with the memory lane of yours just a little bit, which you shared with me"</p>
+        <p id="intro-msg" class="memory-intro">We're going to start with the memory lane of yours just a little bit, which you shared with me. Ready?</p>
         
-        <button id="startBtn" class="nav-btn" onclick="startMemories()">Enter Memory Lane ❤️</button>
+        <button id="startBtn" class="nav-btn" onclick="startMemories()">Si amor, llevame ❤️</button>
 
         <div id="carousel" class="carousel-container">
             <div class="memory-slide">
@@ -131,76 +157,11 @@
             </div>
 
             <div class="memory-slide">
-                <img src="baseball.JPG" alt="Baseball Photo" class="personal-photo">
-                <img src="baseball2.JPG" alt="Baseball Photo" class="personal-photo">
-                <p class="photo-caption">And look at these photos, all about baseball! You looked so happy, going to so many games. Of course I wasn’t there haha, but reading your messages about how grateful you felt and how supportive your parents were is just so beautiful to me🤍</p>
-                <button class="nav-btn" onclick="changeSlide(1)">Next Memory ➡</button>
+                <img src="baby2.JPG" alt="Baby Photo" class="personal-photo">
+                <p class="photo-caption">This one too🥹 Maybe you can tell me later how old you were here haha. I really love your smile in this one. Qué dulce, mi amor!</p>
+                <button class="nav-btn" onclick="changeSlide(1)">Next Photo ➡</button>
             </div>
 
             <div class="memory-slide">
-                <img src="spike.JPG" alt="Spike Hair Photo" class="personal-photo">
-                <p class="photo-caption">Last but not least, this one wins best childhood photo 🏆 I still can’t believe the story behind it — I laugh every time I think about it. You were so serious about making your hair spike that high. You even let your head hang off the bed so it wouldn’t get messed up and made your mom retouch it again. ICONIC. GOLD. 😆💛</p>
-                <button class="nav-btn" onclick="revealLetter()">Now please read my letter ❤️</button>
-            </div>
-        </div>
-
-        <div id="letter-content">
-            <p>
-                Mi amor, Kevin,
-
-                Gracias por traer tanta alegría a mi vida desde el día en que nos conocimos. Gracias por abrirte conmigo y compartir tu vida, incluso estando a miles de kilómetros de distancia. A veces olvido lo lejos que estamos, porque me haces sentir muy cerca, incluso solo a través de los mensajes que nos enviamos cada día.
-
-                Gracias por siempre dar lo mejor de ti a las personas que te rodean. Gracias por ser amable, sincero y honesto. Gracias por dejarme conocerte. Gracias por hacer tiempo para mí a pesar de tu horario tan cambiante, y aun así enviarme esos mensajes largos — los valoro muchísimo, jaja. Gracias por hacerme sonreír todos los días.
-
-                Lo más importante, espero que disfrutes de verdad el comienzo de tus 34 años hoy. Te deseo una vida larga y saludable para que puedas viajar por el mundo y vivir todo lo que sueñas, mi amor. Y espero que el próximo año podamos celebrar tu cumpleaños juntos.
-
-                Disfruta tu día, amor.
-
-                Te quiero mucho 🤍</p>
-            <div class="emoji-row">🎁🥳🎉</div>
-            <button class="nav-btn" onclick="replayMemories()">📸 See Memories Again</button>
-        </div>
-    </div>
-
-    <script>
-        let currentSlide = 0;
-        const slides = document.getElementsByClassName("memory-slide");
-
-        function startMemories() {
-            document.getElementById("intro-msg").style.display = "none";
-            document.getElementById("startBtn").style.display = "none";
-            document.getElementById("carousel").style.display = "block";
-            slides[0].style.display = "block";
-        }
-
-        function changeSlide(n) {
-            slides[currentSlide].style.display = "none";
-            currentSlide += n;
-            slides[currentSlide].style.display = "block";
-        }
-
-        function revealLetter() {
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#8d6e63', '#e5d3b3', '#ffffff']
-            });
-            document.getElementById("carousel").style.display = "none";
-            document.getElementById("subtitle").classList.add("hidden"); // Hides "Hoy celebramos tu vida"
-            document.getElementById("letter-content").style.display = "block";
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-
-        function replayMemories() {
-            document.getElementById("letter-content").style.display = "none";
-            document.getElementById("subtitle").classList.remove("hidden"); // Shows "Hoy celebramos tu vida" again
-            document.getElementById("carousel").style.display = "block";
-            currentSlide = 0;
-            for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
-            slides[0].style.display = "block";
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        }
-    </script>
-</body>
-</html>
+                <img src="siblings.JPG" alt="Siblings Photo" class="personal-photo">
+                <p class="photo-caption">Thank you for sharing this photo with me. I remember the first time I received it — I couldn’t stop smiling. I can’t fully explain it, but seeing this photo makes my heart
