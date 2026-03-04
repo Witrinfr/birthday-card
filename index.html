@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Feliz Cumpleaños, Mi Amor!</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💌🎁</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💌</text></svg>">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
@@ -13,11 +13,10 @@
             margin: 0; padding: 0;
             display: flex; justify-content: center; align-items: center;
             min-height: 100vh;
-            /* Updated to warmer background tones to match the illustration */
             background: linear-gradient(135deg, #e5d3b3 0%, #f5f5dc 100%);
             font-family: 'Quicksand', sans-serif;
             text-align: center;
-            color: #3e2723; /* Dark Chocolate Text */
+            color: #3e2723;
         }
 
         .card {
@@ -43,17 +42,16 @@
             border-radius: 5px; cursor: pointer; font-family: 'Quicksand', sans-serif;
             font-weight: 600; margin-top: 15px; transition: 0.3s;
             position: relative; z-index: 100;
+            display: inline-block;
         }
         .nav-btn:hover { background: #5d4037; transform: scale(1.02); }
 
-        #letter-content { display: none; white-space: pre-line; line-height: 1.8; font-size: 1.1rem; margin-top: -30px; }
-        #letter-content p:first-of-type { margin-top: 0; }
+        #letter-content, #video-page { display: none; white-space: pre-line; line-height: 1.8; font-size: 1.1rem; margin-top: -30px; }
+        #letter-content p:first-of-type, #video-page p:first-of-type { margin-top: 0; }
         .emoji-row { margin-bottom: 30px; font-size: 2rem; }
 
-        /* The Speaker icon stays fixed at the bottom right */
         #muteBtn { position: fixed; bottom: 20px; right: 20px; background: rgba(93, 64, 55, 0.2); border: none; border-radius: 50%; width: 45px; height: 45px; z-index: 1000; cursor: pointer; }
     </style>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💌🎁</text></svg>">    
 </head>
 <body>
 
@@ -67,13 +65,13 @@
         <h1>Feliz cumpleaños, mi amor!</h1>
         <div id="subtitle" class="distance-text">Hoy celebramos tu vida</div>
 
-        <div style="text-align: center; margin-bottom: 25px;">
-            <img src="birthdaycake.jpg" style="max-width: 250px; border-radius: 10px;">
+        <div id="front-view">
+            <div style="text-align: center; margin-bottom: 25px;">
+                <img src="birthdaycake.jpg" class="front-image">
+            </div>
+            <p id="intro-msg" class="memory-intro">Welcome to this dedicated site celebrating your 34th birthday! Remember the photos you shared with me? Yes, we’re going to start this birthday journey by walking down your memory lane. Please bear with me with the captions and everything, as I’m trying my best haha. Are you ready, my love?</p>
+            <button id="startBtn" class="nav-btn" onclick="startMemories()">Si amor, estoy listo ❤️</button>
         </div>
-
-        <p id="intro-msg" class="memory-intro">Welcome to this dedicated site celebrating your 34th birthday! Remember the photos you shared with me? Yes, we’re going to start this birthday journey by walking down your memory lane. Please bear with me with the captions and everything, as I’m trying my best haha. Are you ready, my love?</p>
-    
-        <button id="startBtn" class="nav-btn" onclick="startMemories()">Si amor, estoy listo ❤️</button>
 
         <div id="carousel" class="carousel-container">
             <div class="memory-slide">
@@ -110,8 +108,9 @@
 
             <div class="memory-slide">
                 <img src="spike.JPG" class="personal-photo">
-                <p class="photo-caption">Last but not least, this one wins best childhood photo 🏆 I still can’t believe the story behind it! I laugh every time I think about it. You were so serious about making your hair spike that high. ICONIC. GOLD. 😆♥️</p>
-                <button class="nav-btn" onclick="revealLetter()">Voy a leer mi tarjeta ahora 🤍</button>
+                <p class="photo-caption">Last but not least, this one wins best childhood photo 🏆 I still can’t believe the story behind it! I laugh every time I think about it. You were so serious about making your hair spike that high. ICONIC. GOLD. 😆♥️
+                Now that we are done with the memory lane. Please click the button below!</p>
+                <button class="nav-btn" onclick="revealLetter()">💌 🤍</button>
             </div>
         </div>
 
@@ -123,13 +122,25 @@
 
                 Gracias por siempre dar lo mejor de ti a las personas que te rodean. Gracias por ser tan amable, tan sincero y tan honesto. Gracias por permitirme conocerte de verdad. Gracias por confiar en mí. Gracias por hacer tiempo para mí, aun con tu agenda tan ocupada, y por seguir enviándome esos mensajes largos que valoro más de lo que imaginas. Gracias por hacerme sonreír todos los días.
 
-                Una vez me preguntaste cómo era mi vida antes de ti, y simplemente respondí: “nada especial”. Tal vez era la respuesta más sencilla. Pero si soy honesta, he pasado mucho tiempo trabajando en mí misma, intentando crecer, intentando ser una mejor versión de mí. No siempre fue fácil — el camino para llegar hasta aquí tuvo sus propios desafíos. Pero hay algo que he comprendido, aunque no siempre lo diga en voz alta: tú y yo vemos la vida de una manera muy parecida. La forma en que piensas, en que entiendes las cosas, en que miras el mundo… se siente tan natural para mí. Hablar contigo es tan fácil, tan ligero, como si estuviera hablando con alguien que simplemente me entiende. Y quizá por eso estar contigo se siente tan correcto… porque, de alguna manera, eres la persona que siempre he estado buscando.
+                Una vez me preguntaste cómo era mi vida antes de ti, y simplemente respondí: “nada especial”. Tal vez era la respuesta más sencilla. Pero si soy honesta, he pasado mucho tiempo trabajando en mí misma, intentando crecer, intentando ser una mejor versión de mí. No siempre fue fácil.. el camino para llegar hasta aquí tuvo sus propios desafíos. Pero hay algo que he comprendido, aunque no siempre lo diga en voz alta: tú y yo vemos la vida de una manera muy parecida. La forma en que piensas, en que entiendes las cosas, en que miras el mundo… se siente tan natural para mí. Hablar contigo es tan fácil, tan ligero, como si estuviera hablando con alguien que simplemente me entiende. Y quizá por eso estar contigo se siente tan correcto… porque, de alguna manera, eres la persona que siempre he estado buscando.
 
                 Y lo más importante, espero que disfrutes de verdad el comienzo de tus 34 años hoy. Deseo que tengas una vida larga y saludable, para que puedas viajar por el mundo y vivir todo lo que sueñas, mi amor. Y espero que el próximo año podamos celebrar tu cumpleaños juntos.
 
                 Te quiero mucho, de corazón🤍</p>
             <div class="emoji-row">🎁🥳🎉</div>
-            <button class="nav-btn" onclick="replayMemories()">📸 Llévame al inicio</button>
+            <button class="nav-btn" onclick="showVideoPage()">¡Todavía no está listo, haz clic en mí!</button>
+        </div>
+
+        <div id="video-page">
+            <h1>Un mensaje para ti ❤️</h1>
+            <div style="margin-bottom: 20px;">
+                <video id="personalVideo" controls style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                    <source src="mi-video.mp4" type="video/mp4">
+                    Tu navegador no soporta videos.
+                </video>
+            </div>
+            <p style="color: #5d4037; margin-bottom: 20px;">I have one more little thing for you...</p>
+            <button class="nav-btn" onclick="openWhatsApp()">Ask for another surprise 🎁</button>
         </div>
     </div>
 
@@ -139,11 +150,8 @@
         const music = document.getElementById("bgMusic");
 
         function startMemories() {
-            // Browsers need an interaction to play audio
             music.play().catch(e => console.log("Audio waiting for user"));
-            
-            document.getElementById("intro-msg").style.display = "none";
-            document.getElementById("startBtn").style.display = "none";
+            document.getElementById("front-view").style.display = "none";
             document.getElementById("carousel").style.display = "block";
             slides[0].style.display = "block";
         }
@@ -155,7 +163,6 @@
         }
 
         function revealLetter() {
-            // Burst white love emoji when opening the letter
             confetti({
                 particleCount: 150,
                 spread: 70,
@@ -168,26 +175,16 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        function replayMemories() {
-        // Hide the letter content
-        document.getElementById("letter-content").style.display = "none";
-    
-        // Show the subtitle and front page view again
-        document.getElementById("subtitle").classList.remove("hidden");
-        document.getElementById("intro-msg").style.display = "block";
-        document.getElementById("startBtn").style.display = "block";
-    
-        // Ensure the carousel is hidden
-        document.getElementById("carousel").style.display = "none";
-    
-        // Reset the slide counter for next time
-        currentSlide = 0;
-        for (let i = 0; i < slides.length; i++) {
-        slides[i].style.display = "none";
+        function showVideoPage() {
+            document.getElementById("letter-content").style.display = "none";
+            document.getElementById("video-page").style.display = "block";
+            music.pause(); // Pauses background music so he can hear your video
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
-    
-        // Scroll smoothly to the top
-        window.scrollTo({top: 0, behavior: 'smooth'});
+
+        function openWhatsApp() {
+            const message = encodeURIComponent("I'm ready for my next surprise! ❤️");
+            window.open(`https://wa.me/6285190020021?text=${message}`, '_blank');
         }
 
         function toggleMute() {
@@ -200,18 +197,16 @@
             }
         }
 
-        // Commands the music to pause when the app is minimized or tab is switched
         document.addEventListener("visibilitychange", function() {
             if (document.hidden) {
                 music.pause();
             } else {
-        // Only resumes if the music was already playing (carousel or letter is visible)
-        if (document.getElementById("carousel").style.display === "block" || 
-            document.getElementById("letter-content").style.display === "block") {
-            music.play().catch(e => console.log("Resume blocked by browser"));
-        }
-    }
-});
+                if (document.getElementById("carousel").style.display === "block" || 
+                    document.getElementById("letter-content").style.display === "block") {
+                    music.play().catch(e => console.log("Resume blocked by browser"));
+                }
+            }
+        });
     </script>
 </body>
 </html>
