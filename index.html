@@ -19,10 +19,52 @@
             color: #3e2723;
         }
 
+        /* Envelope / PIN Overlay Style */
+        #pin-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #e5d3b3;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 2000;
+            transition: 0.8s ease-in-out;
+        }
+
+        .envelope {
+            width: 150px; height: 100px;
+            background: #f5f5dc;
+            border: 2px solid #8d6e63;
+            position: relative;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .envelope::after {
+            content: "❤️";
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+        }
+
+        .pin-input {
+            padding: 12px;
+            font-size: 1.5rem;
+            width: 140px;
+            text-align: center;
+            border: 2px solid #8d6e63;
+            border-radius: 10px;
+            font-family: 'Quicksand', sans-serif;
+            letter-spacing: 5px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
         .card {
             background: white; padding: 40px; border-radius: 20px;
             box-shadow: 0 15px 30px rgba(0,0,0,0.05);
             max-width: 400px; width: 90%; margin: 20px; position: relative;
+            display: none; 
         }
 
         h1 { font-weight: 600; font-size: 2.2rem; color: #5d4037; margin: 0 0 10px 0; }
@@ -36,7 +78,6 @@
         
         .personal-photo { max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 15px; }
         
-        /* Line height set to 1.25 as requested */
         .photo-caption, .memory-intro, #letter-content p { 
             font-size: 1rem; color: #5d4037; line-height: 1.25; 
         }
@@ -50,7 +91,6 @@
         }
         .nav-btn:hover { background: #5d4037; transform: scale(1.02); }
 
-        /* Tightened gaps for the letter content */
         #letter-content, #video-page { display: none; white-space: pre-line; margin-top: -15px; }
         #letter-content p:first-of-type { margin-top: 0; padding-top: 0; }
         #letter-content p { margin-bottom: 5px; }
@@ -61,13 +101,22 @@
 </head>
 <body>
 
+    <div id="pin-overlay">
+        <div class="envelope"></div>
+        <h2 style="color: #5d4037; margin-bottom: 5px;">Tienes un mensaje, Kevin!</h2>
+        <p style="color: #8d6e63; font-size: 0.9rem; margin-bottom: 20px;">Ingresa el código de 4 dígitos</p>
+        <input type="password" id="pinCode" class="pin-input" maxlength="4" placeholder="****" inputmode="numeric">
+        <button class="nav-btn" onclick="checkPin()">Abrir sobre 💌</button>
+        <p id="error-msg" style="color: #c0392b; display: none; margin-top: 15px;">Código incorrecto, mi amor! Intenta de nuevo.</p>
+    </div>
+
     <audio id="bgMusic" loop>
         <source src="amor.mp3" type="audio/mpeg">
     </audio>
 
     <button id="muteBtn" onclick="toggleMute()">🔊</button>
 
-    <div class="card">
+    <div class="card" id="mainCard">
         <h1>Feliz cumpleaños, mi amor!</h1>
         <div id="subtitle" class="distance-text">Hoy celebramos tu vida</div>
 
@@ -122,7 +171,7 @@
                 <img src="spike.JPG" class="personal-photo">
                 <p class="photo-caption">Last but not least, this one wins best childhood photo 🏆 I still can’t believe the story behind it! I laugh every time I think about it. You were so serious about making your hair spike that high. You even let your head hang off the bed so it wouldn’t get messed up and made your mom retouch it again. ICONIC. GOLD. 😆♥️
                 
-                    Now that you are done with the memory lane, I wrote a letter!</p>
+                    Anyway, now that you are done with the memory lane... I wrote a letter for you!</p>
                 <button class="nav-btn" onclick="revealLetter()">Llévame a la carta!</button>
             </div>
         </div>
@@ -145,9 +194,9 @@
         </div>
 
         <div id="video-page">
-            <div class="distance-text" style="text-transform: none; font-size: 1.4rem;">Un mensaje para ti ❤️</div>
+            <div class="distance-text" style="text-transform: none; font-size: 1.4rem;">Reproducir el video 🎬</div>
             <div style="margin-bottom: 20px;">
-                <video id="personalVideo" controls style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+                <video id="personalVideo" controls playsinline style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                     <source src="your-video.mp4" type="video/mp4">
                     Tu navegador no soporta videos.
                 </video>
@@ -160,23 +209,37 @@
     </div>
 
     <script>
-        let currentSlide = 0;
-        const slides = document.getElementsByClassName("memory-slide");
         const music = document.getElementById("bgMusic");
+        const slides = document.getElementsByClassName("memory-slide");
+        let currentSlide = 0;
+
+        function checkPin() {
+            const enteredPin = document.getElementById("pinCode").value;
+            if (enteredPin === "5392") { 
+                document.getElementById("pin-overlay").style.opacity = "0";
+                setTimeout(() => {
+                    document.getElementById("pin-overlay").style.display = "none";
+                    document.getElementById("mainCard").style.display = "block";
+                }, 800);
+            } else {
+                document.getElementById("error-msg").style.display = "block";
+                document.getElementById("pinCode").value = "";
+            }
+        }
 
         function startMemories() {
             music.play().catch(e => console.log("Audio waiting for user"));
             document.getElementById("front-view").style.display = "none";
             document.getElementById("carousel").style.display = "block";
             slides[0].style.display = "block";
-            window.scrollTo({top: 0, behavior: 'smooth'}); // Auto-scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'}); 
         }
 
         function changeSlide(n) {
             slides[currentSlide].style.display = "none";
             currentSlide += n;
             slides[currentSlide].style.display = "block";
-            window.scrollTo({top: 0, behavior: 'smooth'}); // Auto-scroll to top
+            window.scrollTo({top: 0, behavior: 'smooth'}); 
         }
 
         function revealLetter() {
@@ -194,8 +257,9 @@
 
         function showVideoPage() {
             document.getElementById("letter-content").style.display = "none";
+            document.getElementById("subtitle").classList.remove("hidden"); // Keeps subtitle visible
             document.getElementById("video-page").style.display = "block";
-            music.pause(); // Pauses background music for video
+            music.pause(); 
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
@@ -225,7 +289,6 @@
             }
         }
 
-        // Auto-pause when switching apps
         document.addEventListener("visibilitychange", function() {
             if (document.hidden) {
                 music.pause();
