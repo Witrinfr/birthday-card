@@ -35,7 +35,11 @@
         @keyframes smoothFade { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
         
         .personal-photo { max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 15px; }
-        .photo-caption { font-size: 1rem; color: #5d4037; line-height: 1.5; }
+        
+        /* Line height set to 1.25 as requested */
+        .photo-caption, .memory-intro, #letter-content p { 
+            font-size: 1rem; color: #5d4037; line-height: 1.25; 
+        }
 
         .nav-btn {
             background: #8d6e63; color: white; border: none; padding: 12px 25px;
@@ -46,8 +50,10 @@
         }
         .nav-btn:hover { background: #5d4037; transform: scale(1.02); }
 
-        #letter-content, #video-page { display: none; white-space: pre-line; line-height: 1.8; font-size: 1.1rem; margin-top: -30px; }
-        #letter-content p:first-of-type, #video-page p:first-of-type { margin-top: 0; }
+        /* Tightened gaps for the letter content */
+        #letter-content, #video-page { display: none; white-space: pre-line; margin-top: -15px; }
+        #letter-content p:first-of-type { margin-top: 0; padding-top: 0; }
+        #letter-content p { margin-bottom: 5px; }
         .emoji-row { margin-bottom: 30px; font-size: 2rem; }
 
         #muteBtn { position: fixed; bottom: 20px; right: 20px; background: rgba(93, 64, 55, 0.2); border: none; border-radius: 50%; width: 45px; height: 45px; z-index: 1000; cursor: pointer; }
@@ -69,7 +75,9 @@
             <div style="text-align: center; margin-bottom: 25px;">
                 <img src="birthdaycake.jpg" class="front-image">
             </div>
+
             <p id="intro-msg" class="memory-intro">Welcome to this dedicated site celebrating your 34th birthday! Remember the photos you shared with me? Yes, we’re going to start this birthday journey by walking down your memory lane. Please bear with me with the captions and everything, as I’m trying my best haha. Are you ready, my love?</p>
+        
             <button id="startBtn" class="nav-btn" onclick="startMemories()">Si amor, estoy listo ❤️</button>
         </div>
 
@@ -108,9 +116,8 @@
 
             <div class="memory-slide">
                 <img src="spike.JPG" class="personal-photo">
-                <p class="photo-caption">Last but not least, this one wins best childhood photo 🏆 I still can’t believe the story behind it! I laugh every time I think about it. You were so serious about making your hair spike that high. ICONIC. GOLD. 😆♥️
-                Now that we are done with the memory lane. Please click the button below!</p>
-                <button class="nav-btn" onclick="revealLetter()">💌 🤍</button>
+                <p class="photo-caption">Last but not least, this one wins best childhood photo 🏆 I still can’t believe the story behind it! I laugh every time I think about it. You were so serious about making your hair spike that high. ICONIC. GOLD. 😆♥️</p>
+                <button class="nav-btn" onclick="revealLetter()">Voy a leer mi tarjeta ahora 🤍</button>
             </div>
         </div>
 
@@ -128,19 +135,21 @@
 
                 Te quiero mucho, de corazón🤍</p>
             <div class="emoji-row">🎁🥳🎉</div>
-            <button class="nav-btn" onclick="showVideoPage()">¡Todavía no está listo, haz clic en mí!</button>
+            <button class="nav-btn" onclick="showVideoPage()">🏠 Siguiente página</button>
         </div>
 
         <div id="video-page">
-            <h1>Un mensaje para ti ❤️</h1>
+            <div class="distance-text" style="text-transform: none; font-size: 1.4rem;">Un mensaje para ti ❤️</div>
             <div style="margin-bottom: 20px;">
                 <video id="personalVideo" controls style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
-                    <source src="mi-video.mp4" type="video/mp4">
+                    <source src="your-video.mp4" type="video/mp4">
                     Tu navegador no soporta videos.
                 </video>
             </div>
             <p style="color: #5d4037; margin-bottom: 20px;">I have one more little thing for you...</p>
             <button class="nav-btn" onclick="openWhatsApp()">Ask for another surprise 🎁</button>
+            <br>
+            <button class="nav-btn" style="background: #a4b0be; font-size: 0.8rem;" onclick="replayMemories()">Go back to the front page</button>
         </div>
     </div>
 
@@ -154,12 +163,14 @@
             document.getElementById("front-view").style.display = "none";
             document.getElementById("carousel").style.display = "block";
             slides[0].style.display = "block";
+            window.scrollTo({top: 0, behavior: 'smooth'}); // Auto-scroll to top
         }
 
         function changeSlide(n) {
             slides[currentSlide].style.display = "none";
             currentSlide += n;
             slides[currentSlide].style.display = "block";
+            window.scrollTo({top: 0, behavior: 'smooth'}); // Auto-scroll to top
         }
 
         function revealLetter() {
@@ -178,13 +189,24 @@
         function showVideoPage() {
             document.getElementById("letter-content").style.display = "none";
             document.getElementById("video-page").style.display = "block";
-            music.pause(); // Pauses background music so he can hear your video
+            music.pause(); // Pauses background music for video
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function openWhatsApp() {
             const message = encodeURIComponent("I'm ready for my next surprise! ❤️");
             window.open(`https://wa.me/6285190020021?text=${message}`, '_blank');
+        }
+
+        function replayMemories() {
+            document.getElementById("video-page").style.display = "none";
+            document.getElementById("subtitle").classList.remove("hidden");
+            document.getElementById("front-view").style.display = "block";
+            currentSlide = 0;
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function toggleMute() {
@@ -197,6 +219,7 @@
             }
         }
 
+        // Auto-pause when switching apps
         document.addEventListener("visibilitychange", function() {
             if (document.hidden) {
                 music.pause();
