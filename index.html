@@ -78,7 +78,7 @@
         
         .personal-photo { max-width: 100%; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.08); margin-bottom: 15px; }
         
-        .photo-caption, .memory-intro, #letter-content p { 
+        .photo-caption, .memory-intro, #letter-text { 
             font-size: 1rem; color: #5d4037; line-height: 1.25; 
         }
 
@@ -92,8 +92,22 @@
         .nav-btn:hover { background: #5d4037; transform: scale(1.02); }
 
         #letter-content, #video-page { display: none; white-space: pre-line; margin-top: -15px; }
-        #letter-content p:first-of-type { margin-top: 0; padding-top: 0; }
-        #letter-content p { margin-bottom: 5px; }
+        
+        /* Translation Button Style */
+        .translate-btn {
+            background: rgba(141, 110, 99, 0.1);
+            border: 1px solid #8d6e63;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-bottom: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #5d4037;
+        }
+
         .emoji-row { margin-bottom: 30px; font-size: 2rem; }
 
         #muteBtn { position: fixed; bottom: 20px; right: 20px; background: rgba(93, 64, 55, 0.2); border: none; border-radius: 50%; width: 45px; height: 45px; z-index: 1000; cursor: pointer; }
@@ -124,13 +138,7 @@
             <div style="text-align: center; margin-bottom: 25px;">
                 <img src="birthdaycake.jpg" class="front-image">
             </div>
-
-            <p id="intro-msg" class="memory-intro">Welcome to this dedicated site celebrating your 34th birthday! Remember the photos you shared with me? Yes, we’re going to start this birthday journey by walking down your memory lane. Please bear with me with the captions and everything, as I’m trying my best haha.
-
-            Oh, and if later you want to mute the sound, just click the speaker icon in the bottom right!
-
-            Vale, ahora, ¿estás listo mi amor?</p>
-        
+            <p id="intro-msg" class="memory-intro">Welcome to this dedicated site celebrating your 34th birthday! Remember the photos you shared with me? Yes, we’re going to start this birthday journey by walking down your memory lane. Please bear with me with the captions and everything, as I’m trying my best haha. <br><br> Oh, and if later you want to mute the sound, just click the speaker icon in the bottom right! <br><br> Vale, ahora, ¿estás listo mi amor?</p>
             <button id="startBtn" class="nav-btn" onclick="startMemories()">Si amor, estoy listo ❤️</button>
         </div>
 
@@ -140,44 +148,19 @@
                 <p class="photo-caption">Let’s start with this little baby Kevin 🥹 I think you were 2 in this picture? I could be wrong but you don't even know about that, so we are even haha. Look how smolll you were! You were once this tiny, just knowing how to cry, laugh, and eat! Completely unaware of things like hospital dynamic shifts 😆</p>
                 <button class="nav-btn" onclick="changeSlide(1)">Siguiente foto 📸</button>
             </div>
-
-            <div class="memory-slide">
-                <img src="baby2.JPG" class="personal-photo">
-                <p class="photo-caption">Here you are a little older... maybe 4? You better go check with your mom, I am curious here haha jk. Your smile here is so sweet, mi cielo. I hope that no matter how hard or tiring life can be, you always keep this same gentle smile. And seriously… what was that pose? 😂</p>
-                <button class="nav-btn" onclick="changeSlide(1)">Siguiente foto 📸</button>
-            </div>
-
-            <div class="memory-slide">
-                <img src="siblings.JPG" class="personal-photo">
-                <p class="photo-caption">Ahhh, thank you for sharing this photo with me, my love. Where do I even begin? I really love this picture! not only were you smiling so confidently haha, but I also got to know your siblings through it. Melissa, the one you look up to. Johanna, who shares the same birth month as you and gave you Nash, making you a cool young uncle.. how wonderful is that? And Jaime, who always comes to the rescue, just like you told me. And you? What were you doing around the house, my love? Hahaha, I’m kidding. I’m sure you did a lot. You’re the youngest, and you complete them with your love, kindness, and softness :)</p>
-                <button class="nav-btn" onclick="changeSlide(1)">Siguiente foto 📸</button>
-            </div>
-            
-            <div class="memory-slide">
-                <img src="baseball.JPG" class="personal-photo">
-                <img src="baseball2.JPG" class="personal-photo">
-                <img src="baseball3.JPG" class="personal-photo">
-                <p class="photo-caption">I feel like basketball and baseball were the biggest parts of your childhood. Hearing all your stories about your sports journey made me smile so much the first time and even now, remembering them makes my heart warm. You joined the greatest basketball team back then, right? You were so passionate… and you still are, especially about baseball. I’m truly glad you had such a beautiful childhood, my love💛</p>
-                <button class="nav-btn" onclick="changeSlide(1)">Siguiente foto 📸</button>
-            </div>
-
-            <div class="memory-slide">
-                <img src="blackeye.JPG" class="personal-photo">
-                <p class="photo-caption">Ahh the black eye that you probably got because of baseball. Even if you don’t remember how it happened exactly haha. Anyway, I may not have known you from the start, but from now on, I hope nothing ever hurts those beautiful eyes again. You’re so calm, gentle, and steady but still, take extra care, okay?</p>
-                <button class="nav-btn" onclick="changeSlide(1)">Siguiente foto 📸</button>
-            </div>
-
             <div class="memory-slide">
                 <img src="spike.JPG" class="personal-photo">
-                <p class="photo-caption">Last but not least, this one wins best childhood photo 🏆 I still can’t believe the story behind it! I laugh every time I think about it. You were so serious about making your hair spike that high. You even let your head hang off the bed so it wouldn’t get messed up and made your mom retouch it again. ICONIC. GOLD. 😆♥️
-                
-                    Anyway, now that you are done with the memory lane... I wrote a letter for you!</p>
+                <p class="photo-caption">Last but not least, this one wins best childhood photo 🏆 I still can’t believe the story behind it! I laugh every time I think about it. You were so serious about making your hair spike that high. You even let your head hang off the bed so it wouldn’t get messed up and made your mom retouch it again. ICONIC. GOLD. 😆♥️ <br><br> Now that you are done with the memory lane, I wrote a letter!</p>
                 <button class="nav-btn" onclick="revealLetter()">Llévame a la carta!</button>
             </div>
         </div>
 
         <div id="letter-content">
-            <p>
+            <div class="translate-btn" onclick="toggleTranslation()">
+                <span id="lang-icon">🇺🇸</span> <span id="lang-text">Translate to English</span>
+            </div>
+            
+            <p id="letter-text">
                 <strong>Queridísimo Kevin Michael Vanegas</strong>,
 
                 Gracias por traer tanta alegría a mi vida desde el día en que nos conocimos. Gracias por abrir tu corazón conmigo y por compartir tu vida, incluso estando a miles de kilómetros de distancia. A veces olvido lo lejos que estamos, porque logras que te sienta tan cerca a través de los mensajes que nos enviamos cada día, y de cada foto y video que compartes conmigo.
@@ -188,13 +171,14 @@
 
                 Y lo más importante, espero que disfrutes de verdad el comienzo de tus 34 años hoy. Deseo que tengas una vida larga y saludable, para que puedas viajar por el mundo y vivir todo lo que sueñas, mi amor. Y espero que el próximo año podamos celebrar tu cumpleaños juntos.
 
-                Te quiero mucho, de corazón🤍</p>
+                Te quiero mucho, de corazón🤍
+            </p>
             <div class="emoji-row">🎁🥳🎉</div>
             <button class="nav-btn" onclick="showVideoPage()">¡Aún no termina, falta uno más! ➡️</button>
         </div>
 
         <div id="video-page">
-            <div class="distance-text" style="text-transform: none; font-size: 1.4rem;">Reproducir el video 🎬</div>
+            <div class="distance-text" style="text-transform: none; font-size: 1.4rem;">Un mensaje para ti ❤️</div>
             <div style="margin-bottom: 20px;">
                 <video id="personalVideo" controls playsinline style="width: 100%; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
                     <source src="your-video.mp4" type="video/mp4">
@@ -212,6 +196,34 @@
         const music = document.getElementById("bgMusic");
         const slides = document.getElementsByClassName("memory-slide");
         let currentSlide = 0;
+        let isEnglish = false;
+
+        const spanishLetter = `<strong>Queridísimo Kevin Michael Vanegas</strong>,\n\nGracias por traer tanta alegría a mi vida desde el día en que nos conocimos. Gracias por abrir tu corazón conmigo y por compartir tu vida, incluso estando a miles de kilómetros de distancia. A veces olvido lo lejos que estamos, porque logras que te sienta tan cerca a través de los mensajes que nos enviamos cada día, y de cada foto y video que compartes conmigo.\n\nGracias por siempre dar lo mejor de ti a las personas que te rodean. Gracias por ser tan amable, tan sincero y tan honesto. Gracias por permitirme conocerte de verdad. Gracias por confiar en mí. Gracias por hacer tiempo para mí, aun con tu agenda tan ocupada, y por seguir enviándome esos mensajes largos que valoro más de lo que imaginas. Gracias por hacerme sonreír todos los días.\n\nUna vez me preguntaste cómo era mi vida antes de ti, y simplemente respondí: “nada especial”. Tal vez era la respuesta más sencilla. Pero si soy honesta, he pasado mucho tiempo trabajando en mí misma, intentando crecer, intentando ser una mejor versión de mí. No siempre fue fácil.. el camino para llegar hasta aquí tuvo sus propios desafíos. Pero hay algo que he comprendido, aunque no siempre lo diga en voz alta: tú y yo vemos la vida de una manera muy parecida. La forma en que piensas, en que entiendes las cosas, en que miras el mundo… se siente tan natural para mí. Hablar contigo es tan fácil, tan ligero, como si estuviera hablando con alguien que simplemente me entiende. Y quizá por eso estar contigo se siente tan correcto… porque, de alguna manera, eres la persona que siempre he estado buscando.\n\nY lo más importante, espero que disfrutes de verdad el comienzo de tus 34 años hoy. Deseo que tengas una vida larga y saludable, para que puedas viajar por el mundo y vivir todo lo que sueñas, mi amor. Y espero que el próximo año podamos celebrar tu cumpleaños juntos.\n\nTe quiero mucho, de corazón🤍`;
+
+        // PROVIDE YOUR ENGLISH TRANSLATION HERE
+        const englishLetter = `<strong>Dearest Kevin Michael Vanegas</strong>,\n\nThank you for bringing so much joy into my life since the day we met. Thank you for opening your heart to me and sharing your life, even being thousands of miles away. Sometimes I forget how far apart we are, because you make me feel so close through the messages we send each day, and every photo and video you share with me.\n\nThank you for always giving your best to the people around you. Thank you for being so kind, so sincere, and so honest. Thank you for letting me truly know you. Thank you for trusting me. Thank you for making time for me, even with your busy schedule, and for continuing to send those long messages that I value more than you imagine. Thank you for making me smile every day.\n\nYou once asked me what my life was like before you, and I simply replied: "nothing special." Perhaps it was the simplest answer. But if I'm honest, I've spent a long time working on myself, trying to grow, trying to be a better version of myself. It wasn't always easy—the path to get here had its own challenges. But there is something I've understood, even if I don't always say it out loud: you and I see life in a very similar way. The way you think, how you understand things, how you look at the world... it feels so natural to me. Talking to you is so easy, so light, as if I were talking to someone who just understands me. And maybe that's why being with you feels so right... because, in a way, you are the person I have always been looking for.\n\nAnd most importantly, I hope you truly enjoy the start of your 34 years today. I wish you a long and healthy life, so you can travel the world and live everything you dream of, my love. And I hope that next year we can celebrate your birthday together.\n\nI love you very much, from my heart🤍`;
+
+        function toggleTranslation() {
+            const letterEl = document.getElementById("letter-text");
+            const langIcon = document.getElementById("lang-icon");
+            const langText = document.getElementById("lang-text");
+            
+            letterEl.style.opacity = 0;
+            
+            setTimeout(() => {
+                if (isEnglish) {
+                    letterEl.innerHTML = spanishLetter;
+                    langIcon.innerText = "🇺🇸";
+                    langText.innerText = "Translate to English";
+                } else {
+                    letterEl.innerHTML = englishLetter;
+                    langIcon.innerText = "🇪🇸";
+                    langText.innerText = "Ver en Español";
+                }
+                letterEl.style.opacity = 1;
+                isEnglish = !isEnglish;
+            }, 300);
+        }
 
         function checkPin() {
             const enteredPin = document.getElementById("pinCode").value;
@@ -228,7 +240,7 @@
         }
 
         function startMemories() {
-            music.play().catch(e => console.log("Audio waiting for user"));
+            music.play().catch(e => console.log("Audio waiting"));
             document.getElementById("front-view").style.display = "none";
             document.getElementById("carousel").style.display = "block";
             slides[0].style.display = "block";
@@ -243,12 +255,7 @@
         }
 
         function revealLetter() {
-            confetti({
-                particleCount: 150,
-                spread: 70,
-                origin: { y: 0.6 },
-                colors: ['#8d6e63', '#e5d3b3', '#ffffff']
-            });
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#8d6e63', '#e5d3b3', '#ffffff'] });
             document.getElementById("carousel").style.display = "none";
             document.getElementById("subtitle").classList.add("hidden");
             document.getElementById("letter-content").style.display = "block";
@@ -257,15 +264,14 @@
 
         function showVideoPage() {
             document.getElementById("letter-content").style.display = "none";
-            document.getElementById("subtitle").classList.remove("hidden"); // Keeps subtitle visible
+            document.getElementById("subtitle").classList.remove("hidden");
             document.getElementById("video-page").style.display = "block";
             music.pause(); 
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function openWhatsApp() {
-            const message = encodeURIComponent("I'm ready for my next surprise!");
-            window.open(`https://wa.me/6285190020021?text=${message}`, '_blank');
+            window.open(`https://wa.me/6285190020021?text=${encodeURIComponent("I'm ready for my next surprise!")}`, '_blank');
         }
 
         function replayMemories() {
@@ -273,30 +279,20 @@
             document.getElementById("subtitle").classList.remove("hidden");
             document.getElementById("front-view").style.display = "block";
             currentSlide = 0;
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
+            for (let i = 0; i < slides.length; i++) { slides[i].style.display = "none"; }
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function toggleMute() {
-            if (music.muted) {
-                music.muted = false;
-                document.getElementById("muteBtn").innerHTML = "🔊";
-            } else {
-                music.muted = true;
-                document.getElementById("muteBtn").innerHTML = "🔈";
-            }
+            music.muted = !music.muted;
+            document.getElementById("muteBtn").innerHTML = music.muted ? "🔈" : "🔊";
         }
 
         document.addEventListener("visibilitychange", function() {
-            if (document.hidden) {
-                music.pause();
-            } else {
-                if (document.getElementById("carousel").style.display === "block" || 
-                    document.getElementById("letter-content").style.display === "block") {
-                    music.play().catch(e => console.log("Resume blocked by browser"));
-                }
+            if (document.hidden) { music.pause(); } 
+            else if (document.getElementById("carousel").style.display === "block" || 
+                     document.getElementById("letter-content").style.display === "block") {
+                music.play().catch(e => console.log("Resume blocked"));
             }
         });
     </script>
